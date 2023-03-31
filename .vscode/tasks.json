@@ -1,0 +1,88 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Make Workspace",
+            "type": "shell",
+            "command": "bash -i -c 'catkin_make'",
+            "presentation": {
+                "reveal": "silent",
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "Create Package",
+            "type": "shell",
+            "command": "bash -i -c 'cd src && catkin_create_pkg ${input:packageName} ${input:dependingPackages}'",
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Roscore",
+            "type": "shell",
+            "options": {
+                "env": {
+                    "ROS_IP": "${input:rosExposedIp}",
+                    "ROS_MASTER_URI": "http://${input:rosExposedIp}:11311",
+                }
+            },
+            "command": "bash -i -c roscore",
+            "presentation": {
+                "reveal": "silent",
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "ROS Echo",
+            "type": "shell",
+            "command": "export ROS_MASTER_URI=http://${input:rosMasterConnectIp}:11311 && export ROS_IP=${input:rosExposedIp} && echo Connecting to ${ROS_MASTER_URI} from ${ROS_IP} && rostopic echo ${input:rosTopicForEcho}",
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "packageName",
+            "type": "promptString",
+            "description": "Please enter the name of new package"
+        },
+        {
+            "id": "dependingPackages",
+            "type": "promptString",
+            "description": "Please enter name of depending packages",
+            "default": "roscpp std_msgs"
+        },
+        {
+            "id": "rosExposedIp",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "command": "hostname -I | tr ' ' '\n'",
+                "description": "Please select your IP address",
+                "useSingleResult": true,
+            }
+        },
+        {
+            "id": "rosMasterConnectIp",
+            "type": "promptString",
+            "description": "Please enter the IP address of the ROS Master",
+            "default": "localhost"
+        },
+        {
+            "id": "rosTopicForEcho",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "command": "rostopic list",
+                "description": "Please choose the ROS topic",
+                "useSingleResult": true,
+            }
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "C_Cpp.intelliSenseCacheSize": 0,
+    "C_Cpp.intelliSenseEngine": "Tag Parser",
+    "python.defaultInterpreterPath": "/usr/bin/python3",
+    "VsCodeTaskButtons.tasks": [
+        {
+            "label": "Roscore",
+            "task": "Roscore",
+            "tooltip": "Launch \"Roscore\" in the background"
+        },
+        {
+            "label": "Make Workspace",
+            "task": "Make Workspace",
+            "tooltip": "Configure the workspace"
+        },
+        {
+            "label": "Create Package",
+            "task": "Create Package",
+            "tooltip": "Create new package"
+        },
+        {
+            "label": "ROS Echo",
+            "task": "ROS Echo",
+            "tooltip": "Echo all messages for a given ROS topic"
+        }
+    ],
+}

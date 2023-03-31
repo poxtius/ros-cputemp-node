@@ -1,0 +1,22 @@
+{
+  "name": "ROS development environment by Tknika",
+  "dockerFile": "Dockerfile",
+  "remoteUser": "ros",
+  "containerEnv": {
+    "DISPLAY": "${localEnv:DISPLAY}"
+  },
+  "runArgs": [
+    "--privileged",
+    "--network=host"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+		"ms-python.python",
+		"ms-vscode.cpptools",
+		"spencerwmiles.vscode-task-buttons",
+		"augustocdias.tasks-shell-input"
+	]
+    }
+  }
+}
